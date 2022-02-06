@@ -16,7 +16,6 @@ const Login = () => {
         if(localStorage.getItem('user-info')){
             // history.push("/add")
             // navigate('/product');
-            console.log()
         }
     }, [navigate]);
    async function login(){
