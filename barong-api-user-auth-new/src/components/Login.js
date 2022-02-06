@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import { useHistory } from "react-router-dom"
 import { useNavigate } from 'react-router-dom';
 
@@ -10,36 +10,35 @@ const Login = () => {
     const [password, setPassword] = useState("")
     const navigate = useNavigate();
 
+    // const navigate = useNavigate();
+    // const history = useHistory();
+    useEffect(()=>{
+        if(localStorage.getItem('user-info')){
+            // history.push("/add")
+            // navigate('/product');
+            console.log()
+        }
+    }, [navigate]);
+   async function login(){
+        console.warn(email,password)
+        let item = {email,password}
+        let result = await fetch("https://cp.btfd.cc/api/v2/barong/identity/users",
 
-
-    const logme = async () => {
-
-        let item = { email, password }
-
-        console.warn(item)
-
-
-        // let result = await fetch("http://localhost:5000/users", 
-
-        let result = await fetch("https://cp.btfd.cc/api/v2/barong/identity/sessions",
-
-            {
-                method: 'POST',
-                body: JSON.stringify(item),
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                }
-            })
-
+        {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(item)
+        });
         result = await result.json()
-        // console.warn("result", result)
+        console.warn("result", result)
         localStorage.setItem("user-info", JSON.stringify(result))
-        // history.push("/login")
-        navigate('/login');
+        // navigate('/product');
 
+ 
     }
-
 
     return (
 
@@ -55,7 +54,7 @@ const Login = () => {
             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="form-control" placeholder="Password" />
             <br />
 
-            <button onClick={logme} className="btn btn-primary">Login</button>
+            <button onClick={login} className="btn btn-primary">Login</button>
         </div>
 
     )

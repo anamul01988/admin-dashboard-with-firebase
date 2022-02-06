@@ -1,6 +1,7 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route, Link } from "react-router-dom";
+import Products from './components/Products';
 import Register from './components/Register';
 import Login from './components/Login';
 
@@ -25,6 +26,7 @@ function App() {
                 <Route path="register" class="nav-link" element={<Register />} />
                 <Route path="login" element={<Login />} />
               </Routes> */}
+                   <Link className="nav-link" to="/Products">Products</Link>
               <Link className="nav-link" to="/register">Register</Link>
               <Link className="nav-link" to="/login">Login</Link>
 
@@ -34,8 +36,9 @@ function App() {
       </nav>
 
       <Routes>
+      <Route path="products" className="nav-link" element={<Products />} />
         <Route path="register" className="nav-link" element={<Register />} />
-        <Route path="login" element={<Login />} />
+        <Route path="login" className="nav-link"  element={<Login />} />
       </Routes>
     </div>
   );
